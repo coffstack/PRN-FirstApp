@@ -1,15 +1,6 @@
-import {
-  Button,
-  Alert,
-  Platform,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableHighlight,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import { Alert, Platform, StyleSheet, Text, View } from "react-native";
+import { Button } from "./components/Button";
+import { TextInput } from "./components/TextInput";
 
 export default function App() {
   function changeName(text: string) {
@@ -27,37 +18,26 @@ export default function App() {
       </Text>
       <TextInput
         autoCapitalize="none"
-        multiline
-        placeholder="Digite seu nome"
+        placeholder="Digite seu e-mail"
         onChangeText={changeName}
-        placeholderTextColor="#ddd"
-        style={styles.textInput}
+      />
+      <TextInput
+        secureTextEntry
+        placeholder="Digite seu senha"
+        onChangeText={changeName}
       />
 
-      <TouchableHighlight
-        onPressIn={() => console.log("onPressIn")}
-        underlayColor={"#550ab1"}
-        onPress={() => console.log("Highlight")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonTitle}>Highlight</Text>
-      </TouchableHighlight>
-      <TouchableOpacity
-        onPressOut={() => console.log("onPressOut")}
-        activeOpacity={0.7}
-        onPress={() => console.log("Opacity")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonTitle}>Opacity</Text>
-      </TouchableOpacity>
-      <Pressable
-        delayLongPress={1000}
-        onLongPress={() => console.log("onLongPress")}
-        onPress={() => console.log("Pressable")}
-        style={styles.button}
-      >
-        <Text style={styles.buttonTitle}>Pressable</Text>
-      </Pressable>
+      <Button
+        style={{ marginTop: 20 }}
+        onPress={() => console.log("Entrar")}
+        title={"Entrar"}
+      />
+      <Button
+        style={{ marginTop: 10 }}
+        onPress={() => console.log("Criar uma Conta")}
+        variant="secondary"
+        title="Criar Conta"
+      />
     </View>
   );
 }
@@ -68,29 +48,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
-  },
-  button: {
-    height: 50,
-    width: 200,
-    backgroundColor: "#1D013F",
-    borderRadius: 12,
-    marginTop: 10,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  buttonTitle: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#FFF",
-  },
-  textInput: {
-    borderWidth: 1,
-    height: 50,
-    width: 250,
-    marginTop: 10,
-    paddingHorizontal: 10,
-    color: "#550ab1",
-    fontWeight: "bold",
-    fontSize: 18,
   },
 });

@@ -1,8 +1,21 @@
-import { Image, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  Alert,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   function changeName(text: string) {
     console.log(text);
+  }
+
+  function onPressButton() {
+    console.log("Pressionou no botão");
+    Alert.alert("Meu primeiro app", Platform.OS);
   }
   return (
     <View style={styles.container}>
@@ -10,29 +23,14 @@ export default function App() {
         Profissional React Native
       </Text>
       <TextInput
-        // value={"Rafael"}
         autoCapitalize="none"
         multiline
         placeholder="Digite seu nome"
-        // onChange={(e) => console.log(e.nativeEvent.text)}
-
-        //Callback that is called when the text input's text changes.
-        // Changed text is passed as an argument to the callback handler.
-        //((text: string) => void) | undefined
-        // onChangeText={(text) => console.log(text)}
         onChangeText={changeName}
         placeholderTextColor="#ddd"
-        style={{
-          borderWidth: 1,
-          height: 50,
-          width: 250,
-          marginTop: 10,
-          paddingHorizontal: 10,
-          color: "#550ab1",
-          fontWeight: "bold",
-          fontSize: 18,
-        }}
+        style={styles.textInput}
       />
+      <Button color="#550ab1" title="Enviar" onPress={onPressButton} />
     </View>
   );
 }
@@ -43,5 +41,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
+  },
+  textInput: {
+    borderWidth: 1,
+    height: 50,
+    width: 250,
+    marginTop: 10,
+    paddingHorizontal: 10,
+    color: "#550ab1",
+    fontWeight: "bold",
+    fontSize: 18,
   },
 });

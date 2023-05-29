@@ -1,23 +1,38 @@
-import { StatusBar } from "expo-status-bar";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 
 export default function App() {
+  function changeName(text: string) {
+    console.log(text);
+  }
   return (
     <View style={styles.container}>
-      <Text> Profissional React Native</Text>
-      <View style={{ backgroundColor: "red" }}>
-        <Image
-          onLoad={({ nativeEvent }) => {
-            console.log("width:", nativeEvent.source.width);
-            console.log("heigh:", nativeEvent.source.height);
-          }}
-          resizeMode="contain"
-          style={{ width: 300, height: 300 }}
-          source={{
-            uri: "https://images.unsplash.com/photo-1661956602153-23384936a1d3",
-          }}
-        />
-      </View>
+      <Text style={{ fontSize: 25, fontWeight: "bold" }}>
+        Profissional React Native
+      </Text>
+      <TextInput
+        // value={"Rafael"}
+        autoCapitalize="none"
+        multiline
+        placeholder="Digite seu nome"
+        // onChange={(e) => console.log(e.nativeEvent.text)}
+
+        //Callback that is called when the text input's text changes.
+        // Changed text is passed as an argument to the callback handler.
+        //((text: string) => void) | undefined
+        // onChangeText={(text) => console.log(text)}
+        onChangeText={changeName}
+        placeholderTextColor="#ddd"
+        style={{
+          borderWidth: 1,
+          height: 50,
+          width: 250,
+          marginTop: 10,
+          paddingHorizontal: 10,
+          color: "#550ab1",
+          fontWeight: "bold",
+          fontSize: 18,
+        }}
+      />
     </View>
   );
 }

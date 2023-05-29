@@ -6,6 +6,9 @@ import {
   Text,
   TextInput,
   View,
+  TouchableHighlight,
+  TouchableOpacity,
+  Pressable,
 } from "react-native";
 
 export default function App() {
@@ -30,7 +33,31 @@ export default function App() {
         placeholderTextColor="#ddd"
         style={styles.textInput}
       />
-      <Button color="#550ab1" title="Enviar" onPress={onPressButton} />
+
+      <TouchableHighlight
+        onPressIn={() => console.log("onPressIn")}
+        underlayColor={"#550ab1"}
+        onPress={() => console.log("Highlight")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonTitle}>Highlight</Text>
+      </TouchableHighlight>
+      <TouchableOpacity
+        onPressOut={() => console.log("onPressOut")}
+        activeOpacity={0.7}
+        onPress={() => console.log("Opacity")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonTitle}>Opacity</Text>
+      </TouchableOpacity>
+      <Pressable
+        delayLongPress={1000}
+        onLongPress={() => console.log("onLongPress")}
+        onPress={() => console.log("Pressable")}
+        style={styles.button}
+      >
+        <Text style={styles.buttonTitle}>Pressable</Text>
+      </Pressable>
     </View>
   );
 }
@@ -41,6 +68,20 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
+  },
+  button: {
+    height: 50,
+    width: 200,
+    backgroundColor: "#1D013F",
+    borderRadius: 12,
+    marginTop: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#FFF",
   },
   textInput: {
     borderWidth: 1,

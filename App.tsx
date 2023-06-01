@@ -1,4 +1,13 @@
-import { Alert, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Alert,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { CoffeeItem } from "./CoffeeList/CoffeeItem";
+import { coffeeList } from "./CoffeeList/data/coffeeList";
 import { Button } from "./components/Button";
 import { List } from "./components/List";
 import { TextInput } from "./components/TextInput";
@@ -19,32 +28,21 @@ export default function App() {
   }
   return (
     <View style={styles.container}>
-      <List />
-      <Text style={{ fontSize: 25, fontWeight: "bold" }}>
-        Profissional React Native
-      </Text>
-      <TextInput
-        autoCapitalize="none"
-        placeholder="Digite seu e-mail"
-        onChangeText={changeName}
-      />
-      <TextInput
-        secureTextEntry
-        placeholder="Digite seu senha"
-        onChangeText={changeName}
-      />
-
-      <Button
-        style={{ marginTop: 20 }}
-        onPress={onPressButton}
-        title={"Entrar"}
-      />
-      <Button
-        style={{ marginTop: 10 }}
-        onPress={() => console.log("Criar uma Conta")}
-        variant="secondary"
-        title="Criar Conta"
-      />
+      <ScrollView
+        onScroll={({ nativeEvent }) => console.log(nativeEvent.contentOffset.y)}
+        scrollEventThrottle={16}
+        // style={{ paddingHorizontal: 10, backgroundColor: "red" }}
+        // contentContainerStyle={{
+        //   paddingHorizontal: 10,
+        //   backgroundColor: "blue",
+        // }}
+        // showsVerticalScrollIndicator={false}
+        // bounces={false}
+      >
+        {coffeeList.map((coffee) => (
+          <CoffeeItem {...coffee} />
+        ))}
+      </ScrollView>
     </View>
   );
 }
@@ -53,7 +51,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#FFF",
-    alignItems: "center",
-    justifyContent: "center",
   },
 });

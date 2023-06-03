@@ -7,7 +7,7 @@ import {
   StyleSheet,
 } from "react-native";
 
-const cover = require("../../assets/coffee-cover.jpg");
+const cover = require("./assets/coffee-cover.jpg");
 const dimensions = {
   with: 900,
   height: 450,

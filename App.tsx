@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Alert,
   Platform,
@@ -5,9 +6,14 @@ import {
   StyleSheet,
   Text,
   View,
+  FlatList,
+  ListRenderItemInfo,
 } from "react-native";
+import { CoffeeHeader } from "./CoffeeList/CoffeeHeader";
 import { CoffeeItem } from "./CoffeeList/CoffeeItem";
-import { coffeeList } from "./CoffeeList/data/coffeeList";
+import { coffeeList100 } from "./CoffeeList/data/coffeeLis100";
+import { Coffee, coffeeList } from "./CoffeeList/data/coffeeList";
+import { SeparatorItem } from "./CoffeeList/SeparatorItem";
 import { Button } from "./components/Button";
 import { List } from "./components/List";
 import { TextInput } from "./components/TextInput";
@@ -18,31 +24,22 @@ export default function App() {
     console.log(text);
   }
 
-  async function onPressButton() {
-    try {
-      const token = await login("lucas@coffstack.com", "123456");
-      Alert.alert("Token", token);
-    } catch (error) {
-      console.log(error);
-    }
+  function renderItem({ item }: ListRenderItemInfo<Coffee>) {
+    return <CoffeeItem {...item} />;
   }
   return (
     <View style={styles.container}>
-      <ScrollView
-        onScroll={({ nativeEvent }) => console.log(nativeEvent.contentOffset.y)}
-        scrollEventThrottle={16}
-        // style={{ paddingHorizontal: 10, backgroundColor: "red" }}
-        // contentContainerStyle={{
-        //   paddingHorizontal: 10,
-        //   backgroundColor: "blue",
-        // }}
-        // showsVerticalScrollIndicator={false}
-        // bounces={false}
-      >
-        {coffeeList.map((coffee) => (
-          <CoffeeItem {...coffee} />
-        ))}
-      </ScrollView>
+      <FlatList
+        // numColumns={2}
+        ListHeaderComponent={CoffeeHeader}
+        ItemSeparatorComponent={SeparatorItem}
+        data={coffeeList}
+        keyExtractor={(coffee) => coffee.name}
+        // renderItem={({ item }) => <CoffeeItem {...item} />}
+        renderItem={renderItem}
+        // windowSize={3}
+        //           initialNumToRender={20}
+      />
     </View>
   );
 }

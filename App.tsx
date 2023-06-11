@@ -1,30 +1,20 @@
 import { useState } from "react";
-import {
-  Alert,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  ListRenderItemInfo,
-} from "react-native";
-import { CoffeeHeader } from "./CoffeeList/CoffeeHeader";
-import { CoffeeItem } from "./CoffeeList/CoffeeItem";
-import { Coffee, coffeeList } from "./CoffeeList/data/coffeeList";
-import { SeparatorItem } from "./CoffeeList/SeparatorItem";
+import { StyleSheet, Text, View } from "react-native";
+
 import { Button } from "./components/Button";
 
 export default function App() {
-  let count = 0;
+  const [count, setCount] = useState(0);
+
+  // let count = 0;
 
   function increment() {
-    count = count + 1;
+    setCount(count + 1);
     console.log(count);
   }
 
   function decrement() {
-    count = count - 1;
+    setCount(count - 1);
     console.log(count);
   }
   return (

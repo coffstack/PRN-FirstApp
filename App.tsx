@@ -1,47 +1,65 @@
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-import { Button } from "./components/Button";
+import { TextInput } from "./components/TextInput";
 
 export default function App() {
-  const [count, setCount] = useState<number>(0);
-  const [showCount, setShowCount] = useState(true);
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    email: "lucas@coffstack.com",
+    address: {
+      country: "Brazil",
+      city: "",
+    },
+  });
 
-  // let count = 0;
+  function updateFirst(text: string) {
+    const updatedValue = {
+      ...formValues,
+    };
+    updatedValue.firstName = text;
 
-  function increment() {
-    //((prevState: S) => S);
-    setCount((prevState) => prevState + 1);
-    console.log(count);
+    setFormValues(updatedValue);
   }
 
-  function decrement() {
-    setCount((prev) => prev - 1);
-    console.log(count);
+  function updateLast(text: string) {
+    setFormValues({
+      ...formValues,
+      lastName: text,
+    });
   }
 
-  function toggleCount() {
-    setShowCount((prev) => !prev);
+  function updateCity(text: string) {
+    setFormValues({
+      ...formValues,
+      address: {
+        ...formValues.address,
+        city: text,
+      },
+    });
   }
 
   return (
     <View style={styles.container}>
-      {showCount && <Text style={styles.count}>{count}</Text>}
+      <TextInput value={formValues.firstName} onChangeText={updateFirst} />
+      <TextInput value={formValues.lastName} onChangeText={updateLast} />
+      <TextInput value={formValues.address.city} onChangeText={updateCity} />
 
-      <Button onPress={increment} title="+ 1" style={styles.buttonContainer} />
-
-      <Button onPress={decrement} title="- 1" style={styles.buttonContainer} />
-
-      <Button variant="secondary" title="show" onPress={toggleCount} />
+      <Text
+        style={styles.text}
+      >{`${formValues.firstName} ${formValues.lastName}:\n${formValues.email} \n ${formValues.address.city} - ${formValues.address.country}`}</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  count: {
-    fontSize: 30,
-    marginBottom: 50,
+  text: {
+    fontSize: 16,
+    marginTop: 50,
     fontWeight: "bold",
+    marginHorizontal: 10,
+    textAlign: "center",
   },
   buttonContainer: {
     marginBottom: 20,
